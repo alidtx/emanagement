@@ -1,0 +1,297 @@
+ALTER TABLE `linked_devices` CHANGE `device_name` `device_name` VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL;
+ALTER TABLE text_lessons CHANGE content_bn content_bn LONGTEXT NULL;
+ALTER TABLE `user_otps` ADD `deleted_at` DATETIME NULL AFTER `updated_at`;
+
+ALTER TABLE `orders` ADD `course_id` INT(20) NOT NULL AFTER `user_detail_id`;
+ALTER TABLE chapters ADD COLUMN file_path_bn VARCHAR(255) NULL AFTER name_bn;
+ALTER TABLE questions CHANGE title title TEXT CHARSET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+CHANGE title_bn title_bn TEXT CHARSET utf8mb4 COLLATE utf8mb4_unicode_ci NULL;
+ALTER TABLE `courses` ADD `web_intro_video` VARCHAR(255) NULL AFTER `intro_video`;
+
+CREATE TABLE course_activities (
+  id bigint unsigned NOT NULL AUTO_INCREMENT,
+  course_id int unsigned NOT NULL,
+  user_id int unsigned DEFAULT NULL,
+  session_id int unsigned DEFAULT NULL,
+  read_at datetime DEFAULT NULL,
+  created_at timestamp NULL DEFAULT NULL,
+  updated_at timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (id)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
+
+ALTER TABLE courses ADD COLUMN is_featured BOOLEAN DEFAULT 0 NOT NULL AFTER access_period;
+
+ALTER TABLE `orders` ADD `source_name` VARCHAR(128) NULL AFTER `order_status`;
+ALTER TABLE exams ADD COLUMN order INT DEFAULT 1 NOT NULL AFTER question_presentation_ord
+
+ALTER TABLE `orders` ADD `source_name` VARCHAR(128) NULL AFTER `order_status`;
+ALTER TABLE exams ADD COLUMN order INT DEFAULT 1 NOT NULL AFTER question_presentation_ord
+
+ALTER TABLE `user_course_enrolls` ADD `enroll_type` VARCHAR(64) NOT NULL DEFAULT 'Purchase' AFTER `order_id`;
+
+ALTER TABLE `apps_version` ADD `is_ssl_payment` VARCHAR(64) NULL AFTER `is_force`, ADD `is_in_app_purchase` VARCHAR(64) NULL AFTER `is_ssl_payment`;
+
+INSERT INTO permissions (id, NAME, group_name, guard_name) VALUES (NULL, 'enroll.index', 'Enrollment', 'web');
+INSERT INTO permissions (id, NAME, group_name, guard_name) VALUES (NULL, 'enroll.create','Enrollment', 'web');
+INSERT INTO permissions (id, NAME, group_name, guard_name) VALUES (NULL, 'enroll.delete','Enrollment', 'web');
+
+INSERT INTO permissions (id, NAME, group_name, guard_name) VALUES (NULL, 'exam-score-mcq.show','Course', 'web');
+INSERT INTO permissions (id, NAME, group_name, guard_name) VALUES (NULL, 'exam-score-mcq.index','Course', 'web');
+
+INSERT INTO permissions (id, NAME, group_name, guard_name) VALUES (NULL, 'company-policy.index', 'Company Policy', 'web');
+INSERT INTO permissions (id, NAME, group_name, guard_name) VALUES (NULL, 'company-policy.create','Company Policy', 'web');
+INSERT INTO permissions (id, NAME, group_name, guard_name) VALUES (NULL, 'company-policy.edit','Company Policy', 'web');
+INSERT INTO permissions (id, NAME, group_name, guard_name) VALUES (NULL, 'company-policy.delete','Company Policy', 'web');
+
+ALTER TABLE `testimonials` ADD COLUMN `order` INT DEFAULT 1 NOT NULL AFTER `image`; 
+
+ALTER TABLE `legends` ADD COLUMN `order` INT DEFAULT 1 NOT NULL AFTER `legend_pic`; 
+
+INSERT INTO `permissions` (`id`, `name`, `group_name`, `guard_name`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(104, 'written-content.index', 'Written Content', 'web', '2023-11-22 10:13:24', '2023-11-22 10:13:24', NULL),
+(105, 'written-content.create', 'Written Content', 'web', '2023-11-22 10:13:24', '2023-11-22 10:13:24', NULL),
+(106, 'written-content.edit', 'Written Content', 'web', '2023-11-22 10:13:24', '2023-11-22 10:13:24', NULL),
+(107, 'written-content.delete', 'Written Content', 'web', '2023-11-22 10:13:24', '2023-11-22 10:13:24', NULL);
+
+CREATE TABLE `written_contents` (
+  `id` bigint UNSIGNED NOT NULL,
+  `subject_id` int NOT NULL,
+  `question` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `question_bn` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `answer` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `answer_bn` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `file_path` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `file_path_bn` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `video_key` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `video_key_bn` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `video_url` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `video_url_bn` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `order` int NOT NULL DEFAULT '1',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE advertisements (
+  id bigint unsigned NOT NULL AUTO_INCREMENT,
+  title varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  url text COLLATE utf8mb4_unicode_ci,
+  advertisement_pic varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  position varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `order` int NOT NULL DEFAULT '1',
+  created_at timestamp NULL DEFAULT NULL,
+  updated_at timestamp NULL DEFAULT NULL,
+  deleted_at timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (id)ALTER TABLE `certificates` ADD `course_id` INT(11) NOT NULL AFTER `user_id`, ADD `reg_number` INT(11) NOT NULL AFTER `course_id`;
+
+CREATE TABLE syllabus (
+  id bigint unsigned NOT NULL AUTO_INCREMENT,
+  course_id int NOT NULL,
+  title text COLLATE utf8mb4_unicode_ci NOT NULL,
+  title_bn text COLLATE utf8mb4_unicode_ci NOT NULL,
+  description longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  description_bn longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  details longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  details_bn longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  order int NOT NULL DEFAULT '1',
+  created_at timestamp NULL DEFAULT NULL,
+  updated_at timestamp NULL DEFAULT NULL,
+  deleted_at timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (id)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
+
+INSERT INTO permissions (id, name, group_name, guard_name, created_at, updated_at, deleted_at) VALUES(NULL,'syllabus.delete','Syllabus','web','2023-11-23 17:37:42','2023-11-23 17:37:42',NULL);
+INSERT INTO permissions (id, name, group_name, guard_name, created_at, updated_at, deleted_at) VALUES(NULL,'syllabus.edit','Syllabus','web','2023-11-23 17:37:42','2023-11-23 17:37:42',NULL);
+INSERT INTO permissions (id, name, group_name, guard_name, created_at, updated_at, deleted_at) VALUES(NULL,'syllabus.create','Syllabus','web','2023-11-23 17:37:42','2023-11-23 17:37:42',NULL);
+INSERT INTO permissions (id, name, group_name, guard_name, created_at, updated_at, deleted_at) VALUES(NULL,'syllabus.index','Syllabus','web','2023-11-23 17:37:42','2023-11-23 17:37:42',NULL);
+INSERT INTO permissions (id, name, group_name, guard_name, created_at, updated_at, deleted_at) VALUES(NULL,'syllabus.show','Syllabus','web','2023-11-23 17:37:42','2023-11-23 17:37:42',NULL);
+
+INSERT INTO `permissions` (`id`, `name`, `group_name`, `guard_name`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(NULL, 'advertisement.index', 'Advertisement', 'web', '2023-11-23 09:53:17', '2023-11-23 09:53:17', NULL),
+(NULL, 'advertisement.create', 'Advertisement', 'web', '2023-11-23 09:53:17', '2023-11-23 09:53:17', NULL),
+(NULL, 'advertisement.edit', 'Advertisement', 'web', '2023-11-23 09:53:17', '2023-11-23 09:53:17', NULL),
+(NULL, 'advertisement.delete', 'Advertisement', 'web', '2023-11-23 09:53:17', '2023-11-23 09:53:17', NULL);
+
+ALTER TABLE `questions` CHANGE `title` `title` LONGTEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL;
+ALTER TABLE `questions` CHANGE `title_bn` `title_bn` LONGTEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL;
+
+ALTER TABLE `exams` CHANGE `question_presentation_ord` `question_presentation_ord` VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL;
+ALTER TABLE `exams` CHANGE `duration` `duration` INT(11) NULL;
+
+//development staging deployed
+
+ALTER TABLE `orders` ADD COLUMN `coupon_id` BIGINT NULL AFTER `user_id`; 
+ALTER TABLE `orders` ADD COLUMN `coupon_discount` DECIMAL(10,2) DEFAULT 0.00 NOT NULL AFTER `order_number`;
+
+CREATE TABLE `coupons` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `code` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `usage_limit` bigint unsigned NOT NULL DEFAULT '0' COMMENT 'Maximum how many users can be used this coupon',
+  `usage_per_customer` bigint unsigned NOT NULL DEFAULT '0' COMMENT 'A users maximum how many times can be used this coupon',
+  `times_used` bigint unsigned NOT NULL DEFAULT '0' COMMENT 'How many times have used this coupons',
+  `type` enum('public','user_specific','course') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'public',
+  `valid_from_date` datetime NOT NULL,
+  `expiration_date` datetime NOT NULL,
+  `discount_type` enum('percent','fixed') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'fixed',
+  `discount_amount` double NOT NULL,
+  `discount_cap` double NOT NULL DEFAULT '0' COMMENT 'Maximum discount amount',
+  `min_cart_total` double NOT NULL DEFAULT '0',
+  `status` tinyint(1) NOT NULL DEFAULT '0',
+
+
+ALTER TABLE `text_lessons` ADD COLUMN `url` VARCHAR(255) NULL AFTER `content_type`;
+
+ALTER TABLE `exams` ADD COLUMN `year` YEAR NULL AFTER `title`, ADD COLUMN `content_title` VARCHAR(255) NULL AFTER `year`;
+
+ALTER TABLE `exams` ADD COLUMN `high_court_exam_setup` VARCHAR(20) NULL AFTER `id`;
+
+insert into `permissions` (`id`, `name`, `group_name`, `guard_name`, `created_at`, `updated_at`, `deleted_at`) values(NULL,'high-court-question.show','High Court Question','web','2023-11-28 12:31:31','2023-11-28 12:31:31',NULL);
+insert into `permissions` (`id`, `name`, `group_name`, `guard_name`, `created_at`, `updated_at`, `deleted_at`) values(NULL,'high-court-question.delete','High Court Question','web','2023-11-27 13:27:29','2023-11-27 13:27:29',NULL);
+insert into `permissions` (`id`, `name`, `group_name`, `guard_name`, `created_at`, `updated_at`, `deleted_at`) values(NULL,'high-court-question.edit','High Court Question','web','2023-11-27 13:27:29','2023-11-27 13:27:29',NULL);
+insert into `permissions` (`id`, `name`, `group_name`, `guard_name`, `created_at`, `updated_at`, `deleted_at`) values(NULL,'high-court-question.create','High Court Question','web','2023-11-27 13:27:29','2023-11-27 13:27:29',NULL);
+insert into `permissions` (`id`, `name`, `group_name`, `guard_name`, `created_at`, `updated_at`, `deleted_at`) values(NULL,'high-court-question.index','High Court Question','web','2023-11-27 13:27:29','2023-11-27 13:27:29',NULL);
+
+CREATE TABLE `high_court_questions` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `chapter_id` int NOT NULL,
+  `question` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `question_bn` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `answer` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `answer_bn` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `file_path` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `file_path_bn` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `video_key` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `video_key_bn` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `video_url` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `video_url_bn` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `order` int NOT NULL DEFAULT '1',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+ALTER TABLE `subjects` CHANGE `attachment` `attachment` INT NULL; 
+
+ALTER TABLE courses
+ADD COLUMN course_type ENUM('High Court', 'Bar Council') NOT NULL DEFAULT 'Bar Council'
+AFTER id;
+
+ALTER TABLE `user_details` CHANGE `institute` `institute` VARCHAR(255) CHARSET utf8mb4 COLLATE utf8mb4_unicode_ci NULL;
+
+ALTER TABLE `orders` ADD COLUMN `coupon_id` BIGINT NULL AFTER `user_id`; 
+ALTER TABLE `orders` ADD COLUMN `coupon_discount` DECIMAL(10,2) DEFAULT 0.00 NOT NULL AFTER `order_number`;
+
+CREATE TABLE `coupon_users` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `coupon_id` bigint unsigned NOT NULL,
+  `user_id` bigint unsigned NOT NULL,
+  `times_used` bigint unsigned NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE `coupon_courses` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `coupon_id` bigint unsigned NOT NULL,
+  `course_id` bigint unsigned NOT NULL,
+  `times_used` bigint unsigned NOT NULL DEFAULT '0',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+insert into `permissions` (`id`, `name`, `group_name`, `guard_name`, `created_at`, `updated_at`, `deleted_at`) values(null,'coupon-users.delete','Coupon User','web','2023-12-13 17:34:08','2023-12-13 17:34:08',NULL);
+insert into `permissions` (`id`, `name`, `group_name`, `guard_name`, `created_at`, `updated_at`, `deleted_at`) values(null,'coupon-users.edit','Coupon User','web','2023-12-13 17:34:08','2023-12-13 17:34:08',NULL);
+insert into `permissions` (`id`, `name`, `group_name`, `guard_name`, `created_at`, `updated_at`, `deleted_at`) values(null,'coupon-users.create','Coupon User','web','2023-12-13 17:34:08','2023-12-13 17:34:08',NULL);
+insert into `permissions` (`id`, `name`, `group_name`, `guard_name`, `created_at`, `updated_at`, `deleted_at`) values(null,'coupon-users.index','Coupon User','web','2023-12-13 17:34:08','2023-12-13 17:34:08',NULL);
+insert into `permissions` (`id`, `name`, `group_name`, `guard_name`, `created_at`, `updated_at`, `deleted_at`) values(null,'coupons.delete','Coupons','web','2023-12-12 17:11:47','2023-12-12 17:11:47',NULL);
+insert into `permissions` (`id`, `name`, `group_name`, `guard_name`, `created_at`, `updated_at`, `deleted_at`) values(null,'coupons.edit','Coupons','web','2023-12-12 17:11:47','2023-12-12 17:11:47',NULL);
+insert into `permissions` (`id`, `name`, `group_name`, `guard_name`, `created_at`, `updated_at`, `deleted_at`) values(null,'coupons.create','Coupons','web','2023-12-12 17:11:47','2023-12-12 17:11:47',NULL);
+insert into `permissions` (`id`, `name`, `group_name`, `guard_name`, `created_at`, `updated_at`, `deleted_at`) values(null,'coupons.index','Coupons','web','2023-12-12 17:11:47','2023-12-12 17:11:47',NULL);
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE `recently_viewed` (
+  `id` bigint UNSIGNED NOT NULL,
+  `user_id` bigint UNSIGNED NOT NULL,
+  `course_id` bigint UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+ALTER TABLE `recently_viewed`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `recently_viewed_user_id_course_id_index` (`user_id`,`course_id`);
+ ALTER TABLE `recently_viewed`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+  ALTER TABLE `recently_viewed`
+  ADD CONSTRAINT `recently_viewed_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+=============================
+CREATE TABLE `category_contents` (
+  `id` bigint UNSIGNED NOT NULL,
+  `corporate_content` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `corporate_content_bn` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `corporate_video` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `corporate_video_bn` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `corporate_video_key` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `corporate_video_key_bn` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `legal_content` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `legal_content_bn` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `legal_video` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `legal_video_bn` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `legal_video_key` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `legal_video_key_bn` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+INSERT INTO `category_contents` (`id`, `corporate_content`, `corporate_content_bn`, `corporate_video`, `corporate_video_bn`, `corporate_video_key`, `corporate_video_key_bn`, `legal_content`, `legal_content_bn`, `legal_video`, `legal_video_bn`, `legal_video_key`, `legal_video_key_bn`, `created_at`, `updated_at`) VALUES
+(1, 'test', 'test', 'test', 'tst', 'mAGPJ144CvQ', 'test', 'test', 'test', 'tes', 'test', 'test', 'test', NULL, '2024-01-04 09:49:45');
+
+ALTER TABLE `category_contents`
+  ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `category_contents`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  INSERT INTO `permissions` (`id`, `name`, `group_name`, `guard_name`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(221, 'content-list', 'Category-Content', 'web', '2024-01-04 09:05:07', '2024-01-04 09:05:07', NULL),
+(222, 'content-edit', 'Category-Content', 'web', '2024-01-04 09:05:07', '2024-01-04 09:05:07', NULL);
+
+
+CREATE TABLE `certificates` (
+  `id` bigint UNSIGNED NOT NULL,
+  `user_id` int UNSIGNED NOT NULL,
+  `course_id` int NOT NULL,
+  `reg_number` int NOT NULL,
+  `verification_link` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `file_path` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+ALTER TABLE `certificates`
+  ADD PRIMARY KEY (`id`);
+ALTER TABLE `certificates`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
+  CREATE TABLE `certificate_settings` (
+  `id` bigint UNSIGNED NOT NULL,
+  `key` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `value` text COLLATE utf8mb4_unicode_ci,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+ALTER TABLE `certificate_settings`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `certificate_settings_key_unique` (`key`);
+ALTER TABLE `certificate_settings`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+INSERT INTO `permissions` (`id`, `name`, `group_name`, `guard_name`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(217, 'certificate.index', 'Certificate', 'web', '2023-12-24 11:52:25', '2023-12-24 11:52:25', NULL),
+(218, 'certificate.create', 'Certificate', 'web', '2023-12-24 11:52:25', '2023-12-24 11:52:25', NULL),
+(219, 'certificate.delete', 'Certificate', 'web', '2023-12-24 11:52:25', '2023-12-24 11:52:25', NULL),
+(220, 'certificate.settings.create', 'Certificate Settings', 'web', '2023-12-24 11:52:25', '2023-12-24 11:52:25', NULL)
+
+ALTER TABLE `partners` ADD `type` VARCHAR(128) NOT NULL DEFAULT 'home' AFTER `name`;

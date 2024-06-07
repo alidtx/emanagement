@@ -1,0 +1,15 @@
+{
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appID": "4AXQJVKA8H.com.sslwireless.legalized.app",
+        "paths": [
+          "/course/Legal-Professional/course-details/*",
+          "/course/Corporate-Compliance/course-details/*",
+          "/course/Bar-Council-Enrollment/course-details/*"
+        ]
+      }
+    ]
+  }
+}

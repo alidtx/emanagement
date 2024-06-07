@@ -1,0 +1,17 @@
+[
+    {
+        "relation": [
+            "delegate_permission/common.handle_all_urls"
+        ],
+        "target": {
+            "namespace": "android_app",
+            "package_name": "com.sslwireless.legalized.app",
+            "sha256_cert_fingerprints": [
+                "71:9F:40:E2:A5:98:F4:2C:E0:8B:38:1A:5E:65:A9:2E:29:5C:FC:6E:5E:00:DB:C5:61:3C:F0:54:00:FA:D8:EE",
+                "DD:62:C0:A5:FC:BD:C0:AD:E6:0A:E1:11:03:07:45:D7:93:CA:D5:06:F2:D9:05:7D:1D:8B:F2:E9:47:CB:53:EB",
+                "7D:15:0E:21:E7:05:01:20:53:03:40:62:F4:9C:21:73:AC:66:5C:50:43:47:AF:70:2E:4F:27:83:2F:33:F5:06",
+                "C0:A4:7D:BC:61:06:6C:0B:7B:35:38:7D:8A:4F:F5:4B:53:D7:17:F5:48:61:DC:28:56:B2:80:A8:8E:5A:97:64"
+            ]
+        }
+    }
+]
